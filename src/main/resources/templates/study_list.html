@@ -1,0 +1,29 @@
+<html layout:decorate="~{layout}">
+<div layout:fragment="content" class="container my-3">
+    <table class="table">
+        <thead class="table-dark">
+        <tr>
+
+            <th style="width:50%">제목</th>
+            <th>글쓴이</th>
+            <th>유지기간</th>
+            <th>점수</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        <tr  class="text-center" th:each="study, loop : ${studyList}">
+            <td class="text-start">
+                <a th:href="@{|/study/detail/${study.studyId}|}" th:text="${study.studyName}"></a>
+
+            </td>
+            <td><span th:text="${study.author.name}"></span></td>
+
+            <td th:text="${study.days}"></td>
+            <td th:text="${study.score}"></td>
+        </tr>
+        </tbody>
+    </table>
+    <a class="btn btn-primary" sec:authorize="isAuthenticated()" th:href="@{/study/write}" >스터디 작성하기</a>
+</div>
+</html>

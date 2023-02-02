@@ -1,0 +1,46 @@
+
+<html layout:decorate="~{layout}">
+<div layout:fragment="content" class="container my-3">
+    <table class="card my-3">
+        <thead class="table-green">
+        <tr>
+            개인정보
+        </tr>
+        </thead>
+        <tbody>
+            <div>이름 <a th:text="${me.name}"></a>
+            </div>
+            <div>이메일 <a th:text="${me.email}"> </a>
+            </div>
+            <div>성별 <a th:text="${me.gender}"> </a>
+            </div>
+
+            <div class="my-3">
+                <a th:href="@{|/user/modify/${me.user_idx}|}" class="btn btn-sm btn-outline-secondary"
+                   sec:authorize="isAuthenticated()"
+                   th:if="${Principal.name== me.name}"
+                   th:text="수정"></a>
+                <a href="javascript:void(0);" th:data-uri="@{|/user/delete/${me.user_idx}|}"
+                   class="delete btn btn-sm btn-outline-secondary" sec:authorize="isAuthenticated()"
+                   th:if="${Principal.name== me.name}"
+                   th:text="탈퇴"></a>
+            </div>
+        </tbody>
+
+    </table>
+    <table class="table">
+        <thead class="table-dark">
+        <tr>
+            <th>내가 만든 스터디</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        <tr  class="text-center" th:each="study, loop : ${studyList}">
+        <td class="text-start">
+            <a th:href="@{|/study/detail/${study.studyId}|}" th:text="${study.studyName}"></a>
+        </td>
+        </tr>
+        </tbody>
+    </table>
+</div>

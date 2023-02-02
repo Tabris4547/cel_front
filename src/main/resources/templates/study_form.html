@@ -1,0 +1,46 @@
+<html layout:decorate="~{layout}">
+<div layout:fragment="content" class="container my-3">
+    <div class="my-3 border-bottom">
+        <div>
+
+            <h4>스터디작성</h4>
+        </div>
+    </div>
+    <form th:object="${studyForm}" method="post">
+        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+        <div th:replace="~{form_errors :: formErrorsFragment}"></div>
+        <div class="mb-3">
+            <label for="studyName" class="form-label">스터디 명</label>
+            <input type="text" th:field="*{studyName}" class="form-control">
+        </div>
+        <div class="mb-3">
+            <label for="studyIntro" class="form-label">스터디 소개</label>
+            <input type="text" th:field="*{studyIntro}" class="form-control">
+        </div>
+        <div class="mb-3">
+            <label for="studyRule" class="form-label">스터디 규칙</label>
+            <input type="text" th:field="*{studyRule}" class="form-control">
+        </div>
+        <div class="mb-3">
+            <label for="mentor" class="form-label">멘토</label>
+            <input type="text" th:field="*{mentor}" class="form-control">
+        </div>
+        <div class="mb-3">
+            <label for="keyOne" class="form-label">키워드1</label>
+            <input type="text" th:field="*{keyOne}" class="form-control">
+        </div>
+        <div class="mb-3">
+            <label for="keyTwo" class="form-label">키워드2</label>
+            <input type="text" th:field="*{keyTwo}" class="form-control">
+        </div>
+        <div class="mb-3">
+            <label for="keyThree" class="form-label">키워드3</label>
+            <input type="text" th:field="*{keyThree}" class="form-control">
+        </div>
+        <button type="submit" class="btn btn-primary">작성완료</button>
+
+    </form>
+
+
+</div>
+</html>

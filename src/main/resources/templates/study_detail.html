@@ -1,0 +1,47 @@
+<html layout:decorate="~{layout}">
+<div layout:fragment="content" class="container my-3">
+    <!-- 질문 -->
+    <h2 class="border-bottom py-2" th:text="${study.studyName}"></h2>
+    <div class="card my-3">
+        <div th:text="${tag.tagOne}"></div> <div th:text="${tag.tagTwo}"></div> <div th:text="${tag.tagThree}"></div>
+
+        <div class="studyIntro">
+            스터디 소개
+        </div>
+        <div th:text="${study.studyIntro}"></div>
+        <div class="studyRule">
+            스터디 규칙
+        </div>
+        <div th:text="${study.studyRule}"></div>
+        <div class="studyMentor">
+            스터디 멘토
+        </div>
+        <div th:text="${study.mentor}"></div>
+
+        <div class="studyDay">
+            스터디 유지기간
+        </div>
+        <div th:text="${study.days}"></div>
+        <div class="my-3">
+            <a th:href="@{|/study/modify/${study.studyId}|}" class="btn btn-sm btn-outline-secondary"
+               sec:authorize="isAuthenticated()"
+               th:if="${study.author!=null and Principal.name== study.author.name}"
+               th:text="수정"></a>
+            <a href="javascript:void(0);" th:data-uri="@{|/study/delete/${study.studyId}|}"
+               class="delete btn btn-sm btn-outline-secondary" sec:authorize="isAuthenticated()"
+               th:if="${study.author != null and Principal.name== study.author.name}"
+               th:text="삭제"></a>
+        </div>
+    </div>
+    <script layout:fragment="script" type='text/javascript'>
+const delete_elements = document.getElementsByClassName("delete");
+Array.from(delete_elements).forEach(function(element) {
+    element.addEventListener('click', function() {
+        if(confirm("정말로 삭제하시겠습니까?")) {
+            location.href = this.dataset.uri;
+        };
+    });
+});
+</script>
+</div>
+</html>
